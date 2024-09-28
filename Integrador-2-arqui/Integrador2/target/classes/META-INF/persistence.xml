@@ -1,0 +1,24 @@
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+             version="3.0">
+    <persistence-unit name="persistenceIntegrador2" transaction-type="RESOURCE_LOCAL">
+        <!-- Clases de entidades -->
+        <class>com.miapp.Estudiante</class>
+        <class>com.miapp.Carrera</class>
+        <class>com.miapp.Inscripcion</class>
+
+        <!-- Configuración de la base de datos -->
+        <properties>
+            <!-- JDBC Connection -->
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/integrador2"/>
+            <property name="jakarta.persistence.jdbc.user" value="tester"/>
+            <property name="jakarta.persistence.jdbc.password" value="password"/>
+            <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- Configuraciones de Hibernate (como implementación de JPA) -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="update"/> <!-- update, validate, create-drop, etc. -->
+            <property name="hibernate.show_sql" value="true"/> <!-- Mostrar consultas SQL en consola -->
+            <property name="hibernate.format_sql" value="true"/> <!-- Formato legible de las consultas -->
+        </properties>
+    </persistence-unit>
+</persistence>
