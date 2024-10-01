@@ -11,7 +11,7 @@ public class InscripcionService {
 
     private EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");
 
-    public void crearInscripcion(Estudiante estudiante, Carrera carrera, int antiguedad, boolean estadoGraduacion) {
+    public void crearInscripcion(Estudiante estudiante, Carrera carrera, int antiguedad, int anioInscripcion, boolean estadoGraduacion) {
         EntityManager em = emf.createEntityManager();
         try {
             em.getTransaction().begin();
@@ -20,6 +20,7 @@ public class InscripcionService {
             inscripcion.setEstudiante(estudiante);
             inscripcion.setCarrera(carrera);
             inscripcion.setAntiguedad(antiguedad);
+            inscripcion.setAnioInscripcion(anioInscripcion);
             inscripcion.setGraduado(estadoGraduacion);
 
             em.persist(inscripcion);
@@ -48,7 +49,7 @@ public class InscripcionService {
         }
     }
 
-    public void matricularEstudiante(Estudiante estudiante, Carrera carrera, int antiguedad) {
+    public void matricularEstudiante(Estudiante estudiante, Carrera carrera, int antiguedad, int anioInscripcion) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
 
@@ -56,6 +57,7 @@ public class InscripcionService {
         inscripcion.setEstudiante(estudiante);
         inscripcion.setCarrera(carrera);
         inscripcion.setAntiguedad(antiguedad);
+        inscripcion.setAnioInscripcion(anioInscripcion);
         inscripcion.setGraduado(false);  // No graduado inicialmente
 
         em.persist(inscripcion);

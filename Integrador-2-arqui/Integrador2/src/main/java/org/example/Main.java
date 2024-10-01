@@ -110,19 +110,19 @@ public class Main {
 
         // b) Matriculo los estudiantes en sus carreras
 
-        inscripcionService.matricularEstudiante(estudiante, carrera, 1);
+        inscripcionService.matricularEstudiante(estudiante, carrera, 1,2013);
 
-        inscripcionService.matricularEstudiante(estudiante2, carrera3, 2);
+        inscripcionService.matricularEstudiante(estudiante2, carrera3, 2,2015);
 
-        inscripcionService.matricularEstudiante(estudiante3, carrera4, 1);
+        inscripcionService.matricularEstudiante(estudiante3, carrera4, 1,1995);
 
-        inscripcionService.matricularEstudiante(estudiante4, carrera5, 3);
+        inscripcionService.matricularEstudiante(estudiante4, carrera5, 3,2015);
 
-        inscripcionService.matricularEstudiante(estudiante5, carrera2, 1);
+        inscripcionService.matricularEstudiante(estudiante5, carrera2, 1,2019);
 
-        inscripcionService.matricularEstudiante(estudiante6, carrera2, 4);
+        inscripcionService.matricularEstudiante(estudiante6, carrera2, 4,2020);
 
-        inscripcionService.matricularEstudiante(estudiante7, carrera, 2);
+        inscripcionService.matricularEstudiante(estudiante7, carrera, 2,2014);
 
         // c) Recupero a todos los estudiantes, ordenados por su edad
 
@@ -149,6 +149,25 @@ public class Main {
         System.out.println("Estudiantes con la carrera y ciudad de residencia solicitadas:");
         estudiantesPorCarreraYCiudad.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido()));
 
+        // 3) Genero reporte de carreras con inscriptos y egresados por año
+
+        List<Object[]> reporteCarreras = carreraService.generarReporteCarreras();
+
+        System.out.println("Reporte de Carreras, Inscriptos y Graduados por año:");
+
+        for (Object[] fila : reporteCarreras) {
+            String nombreCarrera = (String) fila[0];
+            int anioInscripcion = (int) fila[1];
+            String nombreEstudiante = (String) fila[2];
+            String apellidoEstudiante = (String) fila[3];
+            String estado = (String) fila[4];  // "Graduado" o "Inscriptos"
+
+            System.out.println("Carrera: " + nombreCarrera + ", Año de Inscripción: " + anioInscripcion);
+            System.out.println("Estudiante: " + nombreEstudiante + " " + apellidoEstudiante + " - Estado: " + estado);
+            System.out.println("------------------------------------------------------");
+        }
+
+
         //Testeo de altas, bajas y updates
 /*
         Estudiante estudianteTest = new Estudiante();
@@ -173,7 +192,7 @@ public class Main {
 
         //Elimino las tablas al finalizar para facilitar pruebas futuras
         HelperSQL helper= new HelperSQL();
-        //helper.dropAllTables(emf);
+        helper.dropAllTables(emf);
 
 
         emf.close();

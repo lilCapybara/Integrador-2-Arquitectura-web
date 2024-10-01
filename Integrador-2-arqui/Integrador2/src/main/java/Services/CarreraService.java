@@ -107,5 +107,29 @@ public class CarreraService {
 
     }
 
+    public List<Object[]> generarReporteCarreras() {
+        EntityManager em = emf.createEntityManager();
+
+        List<Object[]> resultado = null;
+
+        try {
+            resultado = em.createQuery(
+                            "SELECT c.nombreCarrera, i.anioInscripcion, e.nombre, e.apellido, " +
+                                    "CASE WHEN i.graduado = true THEN 'Graduado' ELSE 'No graduado' END AS estado " +
+                                    "FROM Inscripcion i " +
+                                    "JOIN i.carrera c " +
+                                    "JOIN i.estudiante e " +
+                                    "ORDER BY c.nombreCarrera ASC, i.anioInscripcion ASC, e.apellido ASC, e.nombre ASC", Object[].class)
+                    .getResultList();
+
+        } finally {
+            em.close();
+        }
+
+        return resultado;
+    }
+
+
+
 }
 
