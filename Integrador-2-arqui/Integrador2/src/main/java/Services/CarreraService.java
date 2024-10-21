@@ -114,12 +114,13 @@ public class CarreraService {
 
         try {
             resultado = em.createQuery(
-                            "SELECT c.nombreCarrera, i.anioInscripcion, e.nombre, e.apellido, " +
-                                    "CASE WHEN i.graduado = true THEN 'Graduado' ELSE 'No graduado' END AS estado " +
+                            "SELECT c.nombreCarrera, i.anioInscripcion, " +
+                                    "COUNT(i) AS cantidadInscriptos, " +
+                                    "SUM(CASE WHEN i.graduado = true THEN 1 ELSE 0 END) AS cantidadEgresados " +
                                     "FROM Inscripcion i " +
                                     "JOIN i.carrera c " +
-                                    "JOIN i.estudiante e " +
-                                    "ORDER BY c.nombreCarrera ASC, i.anioInscripcion ASC, e.apellido ASC, e.nombre ASC", Object[].class)
+                                    "GROUP BY c.nombreCarrera, i.anioInscripcion " +
+                                    "ORDER BY c.nombreCarrera ASC, i.anioInscripcion ASC", Object[].class)
                     .getResultList();
 
         } finally {

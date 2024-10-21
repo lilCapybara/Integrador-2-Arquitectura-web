@@ -159,12 +159,11 @@ public class Main {
         for (Object[] fila : reporteCarreras) {
             String nombreCarrera = (String) fila[0];
             int anioInscripcion = (int) fila[1];
-            String nombreEstudiante = (String) fila[2];
-            String apellidoEstudiante = (String) fila[3];
-            String estado = (String) fila[4];  // "Graduado" o "Inscriptos"
+            long cantidadInscriptos = (long) fila[2];
+            long cantidadEgresados = (long) fila[3];
 
             System.out.println("Carrera: " + nombreCarrera + ", Año de Inscripción: " + anioInscripcion);
-            System.out.println("Estudiante: " + nombreEstudiante + " " + apellidoEstudiante + " - Estado: " + estado);
+            System.out.println("Cantidad de Inscriptos: " + cantidadInscriptos + ", Graduados: " + cantidadEgresados);
             System.out.println("------------------------------------------------------");
         }
 
