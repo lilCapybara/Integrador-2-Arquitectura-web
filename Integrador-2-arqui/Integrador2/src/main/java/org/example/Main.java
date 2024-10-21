@@ -139,6 +139,7 @@ public class Main {
         estudiantesPorGenero.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido()));
 
         // f) Recupero carreras ordenadas por cantidad de inscriptos
+        System.out.println("Carreras ordenadas por cantidad de inscriptos:");
         List<Object[]> carrerasConInscriptos = carreraService.getCarrerasByInscriptos();
         for (Object[] result : carrerasConInscriptos) {
             System.out.println("Carrera: " + result[0] + ", Cantidad de inscriptos: " + result[1]);
