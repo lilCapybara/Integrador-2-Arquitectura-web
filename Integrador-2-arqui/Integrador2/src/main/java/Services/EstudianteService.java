@@ -7,7 +7,20 @@ import java.util.List;
 
 public class EstudianteService {
 
-    private EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");
+    private EntityManagerFactory emf;
+
+    private static EstudianteService instance;
+
+    private EstudianteService() {
+        this.emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");;
+    }
+
+    public static EstudianteService getInstance() {
+        if (instance == null) {
+            instance = new EstudianteService();
+        }
+        return instance;
+    }
 
     public void insertEstudiante(Estudiante estudiante) {
         EntityManager em = emf.createEntityManager();

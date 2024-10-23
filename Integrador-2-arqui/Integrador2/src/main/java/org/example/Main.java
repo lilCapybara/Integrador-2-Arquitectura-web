@@ -11,9 +11,9 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");
-        EstudianteService estudianteService = new EstudianteService();
-        CarreraService carreraService = new CarreraService(emf);
-        InscripcionService inscripcionService = new InscripcionService();
+        EstudianteService estudianteService = EstudianteService.getInstance();
+        CarreraService carreraService = CarreraService.getInstance();
+        InscripcionService inscripcionService = InscripcionService.getInstance();
 
         //Creo las carreras
         Carrera carrera = new Carrera();

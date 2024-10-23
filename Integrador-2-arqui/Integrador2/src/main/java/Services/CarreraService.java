@@ -6,12 +6,21 @@ import jakarta.persistence.*;
 
 import java.util.List;
 
+
 public class CarreraService {
 
     private EntityManagerFactory emf;
+    private static CarreraService instance;
 
-    public CarreraService(EntityManagerFactory emf) {
-        this.emf = emf;
+    private CarreraService() {
+        this.emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");;
+    }
+
+    public static CarreraService getInstance() {
+        if (instance == null) {
+            instance = new CarreraService();
+        }
+        return instance;
     }
 
     public void createCarrera(Carrera carrera) {
