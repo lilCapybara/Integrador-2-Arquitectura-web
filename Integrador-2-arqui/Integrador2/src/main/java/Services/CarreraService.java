@@ -1,5 +1,6 @@
 package Services;
 
+import DTOs.CarreraDTO;
 import Entities.*;
 import jakarta.persistence.*;
 
@@ -98,15 +99,15 @@ public class CarreraService {
         }
     }
 
-    public List<Object[]> getCarrerasByInscriptos() {
+    public List<CarreraDTO> getCarrerasByInscriptos() {
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Object[]> query = em.createQuery(
-                "SELECT c.nombreCarrera, COUNT(i) AS inscriptos \n" +
-                        "FROM Inscripcion i \n" +
-                        "JOIN i.carrera c \n" +
-                        "GROUP BY c.nombreCarrera \n" +
-                        "ORDER BY inscriptos DESC\n",
-                Object[].class);
+        TypedQuery<CarreraDTO> query = em.createQuery(
+                "SELECT new DTOs.CarreraDTO(c.idCarrera, c.nombreCarrera, COUNT(i), 0) " +
+                        "FROM Carrera c JOIN c.inscripciones i " +
+                        "GROUP BY c.idCarrera, c.nombreCarrera " +
+                        "HAVING COUNT(i) > 0 " + //Filtra por carreras con al menos una inscripcion
+                        "ORDER BY COUNT(i) DESC",
+                CarreraDTO.class);
         return query.getResultList();
 
     }

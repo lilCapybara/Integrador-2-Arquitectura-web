@@ -5,10 +5,16 @@ import jakarta.persistence.Column;
 public class CarreraDTO {
     private int idCarrera;
     private String nombreCarrera;
-    private int cantInscriptos;
-    private int cantEgresados;
+    private long cantInscriptos;
+    private long cantEgresados;
 
-    public CarreraDTO(int idCarrera, String nombreCarrera, int cantInscriptos, int cantEgresados) {
+    public CarreraDTO(int idCarrera, String nombreCarrera) {
+        this.idCarrera = idCarrera;
+        this.nombreCarrera = nombreCarrera;
+        this.cantInscriptos = 0;
+        this.cantEgresados = 0;
+    }
+    public CarreraDTO(int idCarrera, String nombreCarrera, long cantInscriptos, long cantEgresados) {
         this.idCarrera = idCarrera;
         this.nombreCarrera = nombreCarrera;
         this.cantInscriptos = cantInscriptos;
@@ -31,7 +37,7 @@ public class CarreraDTO {
         this.nombreCarrera = nombreCarrera;
     }
 
-    public int getCantInscriptos() {
+    public long getCantInscriptos() {
         return cantInscriptos;
     }
 
@@ -39,7 +45,7 @@ public class CarreraDTO {
         this.cantInscriptos = cantInscriptos;
     }
 
-    public int getCantEgresados() {
+    public long getCantEgresados() {
         return cantEgresados;
     }
 

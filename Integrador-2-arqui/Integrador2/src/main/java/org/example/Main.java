@@ -1,5 +1,6 @@
 package org.example;
 
+import DTOs.CarreraDTO;
 import Entities.*;
 import HelperSQL.HelperSQL;
 import Services.*;
@@ -10,7 +11,6 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("persistenceIntegrador2");
-
         EstudianteService estudianteService = new EstudianteService();
         CarreraService carreraService = new CarreraService(emf);
         InscripcionService inscripcionService = new InscripcionService();
@@ -143,9 +143,9 @@ public class Main {
 
         // f) Recupero carreras ordenadas por cantidad de inscriptos
         System.out.println("Carreras ordenadas por cantidad de inscriptos:");
-        List<Object[]> carrerasConInscriptos = carreraService.getCarrerasByInscriptos();
-        for (Object[] result : carrerasConInscriptos) {
-            System.out.println("Carrera: " + result[0] + ", Cantidad de inscriptos: " + result[1]);
+        List<CarreraDTO> carrerasConInscriptos = carreraService.getCarrerasByInscriptos();
+        for (CarreraDTO result : carrerasConInscriptos) {
+            System.out.println(result);
         }
 
         // g) Recupero los estudiantes segun carrera y ciudad de residencia
@@ -153,7 +153,7 @@ public class Main {
         System.out.println("Estudiantes con la carrera y ciudad de residencia solicitadas:");
         estudiantesPorCarreraYCiudad.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido()));
 
-        // 3) Genero reporte de carreras con inscriptos y egresados por año
+        /*// 3) Genero reporte de carreras con inscriptos y egresados por año
 
         List<Object[]> reporteCarreras = carreraService.generarReporteCarreras();
 
@@ -168,7 +168,7 @@ public class Main {
             System.out.println("Carrera: " + nombreCarrera + ", Año de Inscripción: " + anioInscripcion);
             System.out.println("Cantidad de Inscriptos: " + cantidadInscriptos + ", Graduados: " + cantidadEgresados);
             System.out.println("------------------------------------------------------");
-        }
+        }*/
 
 
         //Testeo de altas, bajas y updates
