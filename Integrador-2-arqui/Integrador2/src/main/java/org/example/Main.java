@@ -153,22 +153,15 @@ public class Main {
         System.out.println("Estudiantes con la carrera y ciudad de residencia solicitadas:");
         estudiantesPorCarreraYCiudad.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido()));
 
-        /*// 3) Genero reporte de carreras con inscriptos y egresados por año
+        // 3) Genero reporte de carreras con inscriptos y egresados por año
 
-        List<Object[]> reporteCarreras = carreraService.generarReporteCarreras();
+        List<CarreraDTO> reporteCarreras = carreraService.generarReporteCarreras();
 
         System.out.println("Reporte de Carreras, Inscriptos y Graduados por año:");
 
-        for (Object[] fila : reporteCarreras) {
-            String nombreCarrera = (String) fila[0];
-            int anioInscripcion = (int) fila[1];
-            long cantidadInscriptos = (long) fila[2];
-            long cantidadEgresados = (long) fila[3];
-
-            System.out.println("Carrera: " + nombreCarrera + ", Año de Inscripción: " + anioInscripcion);
-            System.out.println("Cantidad de Inscriptos: " + cantidadInscriptos + ", Graduados: " + cantidadEgresados);
-            System.out.println("------------------------------------------------------");
-        }*/
+        for (CarreraDTO carreraDTO : reporteCarreras) {
+            System.out.println(carreraDTO);
+        }
 
 
         //Testeo de altas, bajas y updates

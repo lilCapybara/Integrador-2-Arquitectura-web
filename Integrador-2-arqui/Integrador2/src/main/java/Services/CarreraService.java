@@ -102,7 +102,7 @@ public class CarreraService {
     public List<CarreraDTO> getCarrerasByInscriptos() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<CarreraDTO> query = em.createQuery(
-                "SELECT new DTOs.CarreraDTO(c.idCarrera, c.nombreCarrera, COUNT(i), 0) " +
+                "SELECT new DTOs.CarreraDTO(c.idCarrera, c.nombreCarrera, COUNT(i)) " +
                         "FROM Carrera c JOIN c.inscripciones i " +
                         "GROUP BY c.idCarrera, c.nombreCarrera " +
                         "HAVING COUNT(i) > 0 " + //Filtra por carreras con al menos una inscripcion
@@ -112,20 +112,20 @@ public class CarreraService {
 
     }
 
-    public List<Object[]> generarReporteCarreras() {
+    public List<CarreraDTO> generarReporteCarreras() {
         EntityManager em = emf.createEntityManager();
 
-        List<Object[]> resultado = null;
+        List<CarreraDTO> resultado = null;
 
         try {
             resultado = em.createQuery(
-                            "SELECT c.nombreCarrera, i.anioInscripcion, " +
-                                    "COUNT(i) AS cantidadInscriptos, " +
-                                    "SUM(CASE WHEN i.graduado = true THEN 1 ELSE 0 END) AS cantidadEgresados " +
+                            "SELECT new DTOs.CarreraDTO(c.idCarrera, c.nombreCarrera, COUNT(i), " +
+                                    "SUM(CASE WHEN i.graduado = true THEN 1 ELSE 0 END), i.anioInscripcion) " +
                                     "FROM Inscripcion i " +
                                     "JOIN i.carrera c " +
-                                    "GROUP BY c.nombreCarrera, i.anioInscripcion " +
-                                    "ORDER BY c.nombreCarrera ASC, i.anioInscripcion ASC", Object[].class)
+                                    "GROUP BY c.idCarrera, c.nombreCarrera, i.anioInscripcion " + // Agrupar por año también
+                                    "ORDER BY i.anioInscripcion ASC",
+                            CarreraDTO.class)
                     .getResultList();
 
         } finally {
