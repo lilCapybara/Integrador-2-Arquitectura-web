@@ -120,11 +120,11 @@ public class CarreraService {
         try {
             resultado = em.createQuery(
                             "SELECT new DTOs.CarreraDTO(c.idCarrera, c.nombreCarrera, COUNT(i), " +
-                                    "SUM(CASE WHEN i.graduado = true THEN 1 ELSE 0 END), i.anioInscripcion) " +
+                                    "SUM(CASE WHEN i.graduado = true THEN 1 ELSE 0 END), i.anioInscripcion) " + //Cuenta la cantidad de graduados. Se suma 1 si el estudiante está graduado y si no suma 0
                                     "FROM Inscripcion i " +
                                     "JOIN i.carrera c " +
-                                    "GROUP BY c.idCarrera, c.nombreCarrera, i.anioInscripcion " + // Agrupar por año también
-                                    "ORDER BY i.anioInscripcion ASC",
+                                    "GROUP BY c.idCarrera, c.nombreCarrera, i.anioInscripcion " +
+                                    "ORDER BY c. nombreCarrera, i.anioInscripcion ASC",
                             CarreraDTO.class)
                     .getResultList();
 

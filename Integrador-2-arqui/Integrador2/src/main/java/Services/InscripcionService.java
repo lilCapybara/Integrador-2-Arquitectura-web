@@ -1,10 +1,8 @@
 package Services;
 
 import Entities.*;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
-import jakarta.persistence.TypedQuery;
+import jakarta.persistence.*;
+
 import java.util.List;
 
 public class InscripcionService {
@@ -65,6 +63,33 @@ public class InscripcionService {
         em.close();
     }
 
+    private Inscripcion obtenerInscripcion(Estudiante estudiante, Carrera carrera){
+        EntityManager em = emf.createEntityManager();
+        try {
+            TypedQuery<Inscripcion> query = em.createQuery("SELECT i FROM Inscripcion i WHERE i.estudiante.idEstudiante = :idEstudiante AND i.carrera.idCarrera = :idCarrera",
+                    Inscripcion.class);
+            query.setParameter("idEstudiante", estudiante.getIdEstudiante());
+            query.setParameter("idCarrera", carrera.getIdCarrera());
+            return query.getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
+        finally {
+            em.close();
+        }
+    }
+
+    public void egresarEstudiante(Estudiante estudiante, Carrera carrera){
+        EntityManager em = emf.createEntityManager();
+        em.getTransaction().begin();
+        Inscripcion insc = this.obtenerInscripcion(estudiante,carrera);
+        if (insc!=null){
+            insc.setGraduado(true);
+            em.merge(insc);
+            em.getTransaction().commit();
+        }
+        em.close();
+    }
 
 
 }

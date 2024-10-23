@@ -12,8 +12,6 @@ public class CarreraDTO {
     public CarreraDTO(int idCarrera, String nombreCarrera) {
         this.idCarrera = idCarrera;
         this.nombreCarrera = nombreCarrera;
-        this.cantInscriptos = 0;
-        this.cantEgresados = 0;
         this.anioInscripcion = 0;
     }
 
@@ -21,7 +19,6 @@ public class CarreraDTO {
         this.idCarrera = idCarrera;
         this.nombreCarrera = nombreCarrera;
         this.cantInscriptos = cantInscriptos;
-        this.cantEgresados = 0;
         this.anioInscripcion = 0;
     }
 

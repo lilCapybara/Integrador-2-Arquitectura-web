@@ -126,6 +126,7 @@ public class Main {
 
         inscripcionService.matricularEstudiante(estudiante7, carrera, 2,2014);
 
+
         // c) Recupero a todos los estudiantes, ordenados por su edad
 
         System.out.println("Lista de estudiantes ordenados segun su edad:");
@@ -152,6 +153,14 @@ public class Main {
         List<Estudiante> estudiantesPorCarreraYCiudad = estudianteService.getEstudianteByCarreraAndCiudad("Medicina","Córdoba");
         System.out.println("Estudiantes con la carrera y ciudad de residencia solicitadas:");
         estudiantesPorCarreraYCiudad.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido()));
+
+
+
+
+        // Egreso estudiantes
+        inscripcionService.egresarEstudiante(estudiante,carrera);
+        inscripcionService.egresarEstudiante(estudiante7,carrera);
+        inscripcionService.egresarEstudiante(estudiante,carrera2); // No existe esta inscripcion, no debería hacer nada
 
         // 3) Genero reporte de carreras con inscriptos y egresados por año
 
