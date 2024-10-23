@@ -39,7 +39,7 @@ public class InscripcionService {
             em.close();
         }
     }
-
+/*
     public Inscripcion obtenerInscripcionPorId(int idInscripcion) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -48,7 +48,7 @@ public class InscripcionService {
             em.close();
         }
     }
-
+*/
     public void matricularEstudiante(Estudiante estudiante, Carrera carrera, int antiguedad, int anioInscripcion) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();

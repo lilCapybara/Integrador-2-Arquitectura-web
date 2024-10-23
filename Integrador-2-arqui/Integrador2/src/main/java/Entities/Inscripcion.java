@@ -4,16 +4,15 @@ import jakarta.persistence.*;
 
 @Entity
 public class Inscripcion {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int idInscripcion;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "idEstudiante")
+    @JoinColumn(name = "idEstudiante", referencedColumnName = "idEstudiante")
     private Estudiante estudiante;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "idCarrera")
+    @JoinColumn(name = "idCarrera", referencedColumnName = "idCarrera")
     private Carrera carrera;
 
     private Integer antiguedad;
@@ -31,9 +30,9 @@ public class Inscripcion {
         this.graduado = graduado;
     }
 
-    public int getIdInscripcion() {
-        return idInscripcion;
-    }
+
+
+
 
     public Estudiante getEstudiante() {
         return estudiante;

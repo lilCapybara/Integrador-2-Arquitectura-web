@@ -101,7 +101,11 @@ public class CarreraService {
     public List<Object[]> getCarrerasByInscriptos() {
         EntityManager em = emf.createEntityManager();
         TypedQuery<Object[]> query = em.createQuery(
-                "SELECT c.nombreCarrera, COUNT(i.idInscripcion) AS inscriptos FROM Inscripcion i JOIN i.carrera c GROUP BY c.nombreCarrera ORDER BY inscriptos DESC",
+                "SELECT c.nombreCarrera, COUNT(i) AS inscriptos \n" +
+                        "FROM Inscripcion i \n" +
+                        "JOIN i.carrera c \n" +
+                        "GROUP BY c.nombreCarrera \n" +
+                        "ORDER BY inscriptos DESC\n",
                 Object[].class);
         return query.getResultList();
 

@@ -112,6 +112,8 @@ public class Main {
 
         inscripcionService.matricularEstudiante(estudiante, carrera, 1,2013);
 
+        //inscripcionService.matricularEstudiante(estudiante, carrera, 2,2099); Si matriculo un estudiante repetido, saltara error
+
         inscripcionService.matricularEstudiante(estudiante2, carrera3, 2,2015);
 
         inscripcionService.matricularEstudiante(estudiante3, carrera4, 1,1995);
@@ -126,8 +128,9 @@ public class Main {
 
         // c) Recupero a todos los estudiantes, ordenados por su edad
 
+        System.out.println("Lista de estudiantes ordenados segun su edad:");
         List<Estudiante> estudiantesPorEdad = estudianteService.getEstudiantesByEdad();
-        estudiantesPorEdad.forEach(e -> System.out.println("Lista de estudiantes ordenados segun su edad:" + e.getNombre() + " " + e.getApellido() + " (" + e.getEdad() + ")"));
+        estudiantesPorEdad.forEach(e -> System.out.println(e.getNombre() + " " + e.getApellido() + " (" + e.getEdad() + ")"));
 
         // d) Recupero estudiante por libreta universitaria
         Estudiante estudianteRecuperado = estudianteService.getEstudianteByLibreta(20230001);
